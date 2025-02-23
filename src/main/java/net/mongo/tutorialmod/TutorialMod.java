@@ -1,4 +1,4 @@
-package net.kaupenjoe.tutorialmod;
+package net.mongo.tutorialmod;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -14,7 +14,8 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.mongo.tutorialmod.item.Moditems;
+import net.mongo.tutorialmod.block.ModBlocks;
+import net.mongo.tutorialmod.item.ModItems;
 import org.slf4j.Logger;
 
 // Very important Comment
@@ -32,8 +33,8 @@ public class TutorialMod {
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
 
-        Moditems.register(modEventBus);
-
+        ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -50,8 +51,14 @@ public class TutorialMod {
     {
         if(event.getTabKey() == CreativeModeTabs.INGREDIENTS)
         {
-            event.accept(Moditems.ALEXENDRITE);
-            event.accept(Moditems.RAW_ALEXANDRITE);
+            event.accept(ModItems.ALEXENDRITE);
+            event.accept(ModItems.RAW_ALEXANDRITE);
+        }
+
+        if(event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS)
+        {
+            event.accept(ModBlocks.ALEXANDRITE_BLOCK);
+            event.accept(ModBlocks.RAW_ALEXANDRITE_BLOCK);
         }
     }
 
